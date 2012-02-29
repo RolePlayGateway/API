@@ -1,1 +1,102 @@
-<h1>RolePlayGateway's API</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RolePlayGateway's API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+  </head>
+  
+  <body>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+
+        <h1>RolePlayGateway's API</h1>
+        <p>We currently provide read-only data through our REST API at <code>api.roleplaygateway.com</code>, providing a window into the resources on RolePlayGateway as JSON-encoded objects.</p>    
+        
+        <p>All endpoints are served from the following location, utilizing a <strong>resource</strong> to determine what you are accessing:</p>
+        <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/<strong>{resource}</strong></code>
+        
+        <hr>
+        
+        <h2>Pagination</h2>
+        <p>All results can be paginated using the <code>GET</code> parameters <code>limit</code> and (<code>start</code> or <code>page</code>).  </p>
+        
+        <hr><h2>Resources</h2>
+        <div>
+          <hr><h3>Users</h3>
+          <div>
+            <hr><h4>Index</h3>
+            <div>
+              <p>Provides a list of users.</p>
+              <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/users</code>
+            </div>
+            
+            <hr><h4>Entity</h4>
+            <div>
+              <p>Serves the details about a specific user <strong>ID</strong>.</p>
+              <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/users/<strong>{ID}</strong></code>
+            </div>
+          </div>
+          
+          <hr><h3>Roleplays</h3>
+          <div>
+            <hr><h4>Index</h3>
+            <div>
+              <p>Provides a list of roleplays.</p>
+              <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays</code>
+            </div>
+            
+            <hr><h4>Entity</h4>
+            <div>
+              <p>Serves the details about a specific roleplay <strong>ID</strong>.</p>
+              <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong></code>
+            </div>
+            
+            <hr><h4>Aspects</h4>
+            <div>
+              <p>Serves the list of <strong>aspect</strong> about a specific roleplay <strong>ID</strong>.</p>
+              <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/<strong>{aspect}</strong></code>
+              
+              <hr><h5>Groups</h5>
+              <div>
+                <h6>List</h6>
+                <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/groups</code>
+                <h6>Detail</h6>
+                <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/groups/<strong>{groupID}</strong></code>
+              </div>
+              
+              <hr><h5>Places</h5>
+              <div>
+                <h6>List</h6>
+                <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/places</code>
+                <h6>Detail</h6>
+                <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/places/<strong>{characterID}</strong></code>
+              </div>
+              
+              <hr><h5>Characters</h5>
+              <div>
+                <h6>List</h6>
+                <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/characters</code>
+                <h6>Detail</h6>
+                <strong>URI:</strong> <code>http://api.roleplaygateway.com/v1/roleplays/<strong>{ID}</strong>/characters/<strong>{characterID}</strong></code>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; RolePlayGateway 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+    
+  </body>
+</html>
