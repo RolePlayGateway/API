@@ -14,7 +14,10 @@ const RPG = require('./lib/rpg');
 const Entity = require('./types/entity');
 
 const authorizer = function (req, res, next) {
-  const auth = req.params['auth'];
+  if (!req.headers.authorization) {
+    return res.status(403).json({ error: 'No credentials sent!' });
+  }
+
   next();
 };
 
@@ -53,6 +56,8 @@ async function main () {
     next();
   });
 
+  // server.express.use(authorizer);
+
   server._addRoute('GET', '/authors', async function (req, res, next) {
     let result = null;
 
@@ -60,64 +65,6 @@ async function main () {
       result = await rpg.listOnline();
     } else {
       result = await rpg.listAuthors(req.query);
-    }
-
-    res.send(result);
-  });
-
-  server._addRoute('POST', '/messages', async function (req, res, next) {
-    let message = req.body;
-    let result = await rpg._createChatMessage(message);
-    return res.send({ status: 'success', result: result });
-  });
-
-  server._addRoute('POST', '/movements', async function (req, res, next) {
-    let auth = req.params['auth'];
-
-    let direction = req.body['direction'];
-    let characterID = req.body['characterID'];
-    let vehicleID = req.body['vehicleID'];
-    let mobID = req.body['mobID'];
-    let presentLocation = null;
-    let context = null;
-    let entity = null;
-    let result = null;
-    let id = null;
-
-    if (characterID) {
-      context = 'character';
-      id = parseInt(characterID);
-    } else if (vehicleID) {
-      context = 'vehicle';
-      id = parseInt(vehicleID);
-    } else if (mobID) {
-      context = 'mob';
-      id = parseInt(mobID);
-    } else if (req.body['actor']) {
-      context = 'actor';
-      id = parseInt(req.body['actor']['id']);
-    } else {
-      return res.send({ status: 'error', message: 'No context provided.' });
-    }
-
-    switch (context) {
-      case 'actor':
-        let actor = req.body['actor'];
-        console.log('handling movement for ACTOR:', actor);
-        result = {};
-        break;
-      case 'character':
-        entity = await rpg.getCharacterByID(id);
-        result = await rpg.moveCharacterInstance(id, direction);
-        break;
-      case 'vehicle':
-        entity = await rpg.getVehicleByID(id);
-        result = await rpg.moveVehicleInstance(id, direction);
-        break;
-      case 'mob':
-        entity = await rpg.getMobInstanceByID(id);
-        result = await rpg.moveMobInstance(id, direction);
-        break;
     }
 
     res.send(result);
@@ -198,21 +145,6 @@ async function main () {
   server._addRoute('GET', '/places/:id', async function (req, res, next) {
     const result = await rpg.getPlaceByID(req.params['id']);
     if (!result) return next();
-    res.send(result);
-  });
-
-  server._addRoute('PATCH', '/places/:id', async function (req, res, next) {
-    const result = await rpg.getPlaceByID(req.params['id']);
-
-    if (!result) return next();
-    if (!req.body) return res.send({ status: 'error', message: 'You must provide an update body.' });
-    if (!req.body.channel) return res.send({ status: 'error', message: 'Channel key is required.' });
-    let patch = {
-      channel: req.body['channel']
-    };
-
-    let answer = await rpg.updatePlace(req.params['id'], patch);
-
     res.send(result);
   });
 
