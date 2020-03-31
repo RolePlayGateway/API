@@ -8,7 +8,7 @@ const settings = {
   mysql: require('./settings/mysql')
 };
 
-const HTTPServer = require('@fabric/http');
+const HTTPServer = require('@fabric/http/types/server');
 const RPG = require('./lib/rpg');
 // const Entity = require('@fabric/core/types/entity');
 const Entity = require('./types/entity');
