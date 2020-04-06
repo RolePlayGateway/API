@@ -12,7 +12,10 @@
   "author": "Eric Martindale",
   "license": "MIT",
   "dependencies": {
-    "@fabric/http": "github:martindale/web#fabric-0.1.0",
+    "@fabric/http": "FabricLabs/web.git#rpg-0.2.0-api",
+    "blob-to-buffer": "^1.2.8",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
     "graphviz": "0.0.9",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5"

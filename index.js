@@ -8,7 +8,11 @@ const settings = {
   mysql: require('./settings/mysql')
 };
 
-const HTTPServer = require('@fabric/http/types/server');
+// External Types
+// const HTTPServer = require('@fabric/http/types/server');
+const HTTPServer = require('./types/server');
+
+// Internal Types
 const RPG = require('./lib/rpg');
 // const Entity = require('@fabric/core/types/entity');
 const Entity = require('./types/entity');
@@ -48,7 +52,7 @@ const format = function (output) {
 }
 
 async function main () {
-  let server = new HTTPServer({ port: 9998, secure: false });
+  let server = new HTTPServer({ port: 9998, secure: false, reconnect: false });
   let rpg = new RPG(settings);
 
   server.express.use(function (req, res, next) {
