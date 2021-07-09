@@ -1,0 +1,6 @@
+{
+  "user": "database_user",
+  "password": "database_password",
+  "socket": "path_to_socket_file",
+  "database": "name_of_database"
+}
